@@ -1,0 +1,20 @@
+stages:
+  - validate
+
+default:
+  tags:
+    - docker
+
+TFsec:validate:
+  stage: validate
+  image: tfsec/tfsec-ci
+  script:
+    - tfsec .
+
+checkov:validate:
+  stage: validate
+  image:
+    name: bridgecrew/checkov
+    entrypoint: [""]
+  script:
+    - checkov -d . --quiet
